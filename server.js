@@ -18,11 +18,26 @@ const app = express();
 
 app.use(express.json());
 app.use(express.static("public"));
+const path = require("path");
 
+app.get("/", (req, res) => {
+    res.sendFile(path.join(__dirname, "public", "index.html"));
+});
 // Connect MongoDB
-mongoose.connect(process.env.MONGO_URI)
-    .then(() => console.log("MongoDB Connected"))
-    .catch(err => console.log(err));
+async function connectDB(req, res, next) {
+    try {
+        if (mongoose.connection.readyState !== 1) {
+            await mongoose.connect(process.env.MONGO_URI);
+        }
+
+        next();
+    } catch (error) {
+        console.error("MongoDB error:", error);
+        res.status(500).json({ message: "Database connection failed" });
+    }
+}
+
+app.use(connectDB);
 
 
 // POST API
