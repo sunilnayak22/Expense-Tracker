@@ -1,0 +1,142 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>Money Track - Dashboard</title>
+
+    <link rel="stylesheet" href="style.css">
+
+    <!-- Icons -->
+    <link rel="stylesheet"
+    href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
+
+    <!-- Chart.js -->
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+</head>
+
+<body>
+
+<div class="dashboard">
+
+    <!-- SIDEBAR -->
+    <aside class="sidebar">
+
+        <div class="profile">
+            <div class="avatar">👨🏻‍💻</div>
+
+            <div>
+                <h2>Cedric</h2>
+                <p>Money Track</p>
+            </div>
+        </div>
+
+        <nav class="navigation">
+
+            <a href="#" class="nav-link active" data-page="Dashboard">
+                <i class="fa-solid fa-chart-line"></i>
+                <span>Dashboard</span>
+            </a>
+
+            <a href="#" class="nav-link" data-page="Incomes">
+                <i class="fa-solid fa-money-bill-transfer"></i>
+                <span>Incomes</span>
+            </a>
+
+            <a href="#" class="nav-link" data-page="Expenses">
+                <i class="fa-solid fa-money-bill-wave"></i>
+                <span>Expenses</span>
+            </a>
+
+        </nav>
+
+        <button class="logout">
+            <i class="fa-solid fa-right-from-bracket"></i>
+            Sign Out
+        </button>
+
+    </aside>
+
+
+    <!-- MAIN CONTENT -->
+    <main class="main-content">
+
+        <div class="left-content">
+
+            <h1 id="page-title">All Transactions</h1>
+
+            <!-- SUMMARY CARDS -->
+            <section class="summary">
+
+                <div class="summary-card">
+                    <h2>Total Income</h2>
+                    <p class="income-text" id="total-income">
+                        ₹6,230
+                    </p>
+                </div>
+
+                <div class="summary-card">
+                    <h2>Total Expense</h2>
+                    <p class="expense-text" id="total-expense">
+                        ₹2,740
+                    </p>
+                </div>
+
+                <div class="summary-card balance-card">
+                    <h2>Total Balance</h2>
+                    <p id="total-balance">₹3,490</p>
+                </div>
+
+            </section>
+            <section style="display: flex; justify-content: center; margin: 15px;">
+                <form id="expenseForm">
+                    <h3>Add your Expense or Income here</h3>
+    <input
+        type="text"
+        id="title"
+        placeholder="Expense title"
+        required
+    >
+
+    <input
+        type="number"
+        id="amount"
+        placeholder="Amount"
+        min="0.01"
+        step="0.01"
+        required
+    >
+
+    <select id="type" required class="selector">
+        <option value="expense">Expense</option>
+        <option value="income">Income</option>
+    </select>
+
+    <button type="submit" class="btn-primary">Add Transaction</button>
+
+    <p id="message"></p>
+
+</form>
+            </section>
+        </div>
+
+
+        <!-- RECENT HISTORY -->
+        <section class="history-section" id="history-section">
+
+            <h2>Recent History</h2>
+
+            <div id="transaction-list"></div>
+
+        </section>
+
+    </main>
+
+</div>
+
+<script src="script.js"></script>
+
+</body>
+</html>
