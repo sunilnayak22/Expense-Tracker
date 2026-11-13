@@ -1,7 +1,16 @@
-require("dotenv").config();
+const dotenv = require("dotenv");
+
+const result = dotenv.config({
+    path: __dirname + "/.env"
+});
+
+console.log("DOTENV ERROR:", result.error);
+console.log("LOADED VARIABLES:", Object.keys(result.parsed || {}));
+console.log("MONGO URI LOADED:", !!process.env.MONGO_URI);
+
+
 const express = require("express");
 const mongoose = require("mongoose");
-
 
 const Expense = require("./modules/expense");
 
@@ -79,8 +88,13 @@ app.get("/api/data", async (req, res) => {
     }
 });
 
-mongoose.connection.once("open", () => {
-    app.listen(process.env.PORT || 3000, () => {
-        console.log("Server running at http://localhost:3000");
+module.exports = app;
+
+// Only start a local server during local development
+if (!process.env.VERCEL) {
+    mongoose.connection.once("open", () => {
+        app.listen(process.env.PORT || 3000, () => {
+            console.log("Server running on port 3000");
+        });
     });
-});
+}
