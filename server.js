@@ -23,7 +23,7 @@ const path = require("path");
 app.get("/", (req, res) => {
     res.sendFile(path.join(__dirname, "public", "index.html"));
 });
-// Connect MongoDB
+
 async function connectDB(req, res, next) {
     try {
         if (mongoose.connection.readyState !== 1) {
@@ -31,9 +31,13 @@ async function connectDB(req, res, next) {
         }
 
         next();
+
     } catch (error) {
-        console.error("MongoDB error:", error);
-        res.status(500).json({ message: "Database connection failed" });
+        console.error("MongoDB connection error:", error);
+
+        res.status(500).json({
+            message: "Database connection failed"
+        });
     }
 }
 
