@@ -82,8 +82,6 @@ async function getData() {
         document.getElementById("transaction-list").textContent =
             "Could not load transactions: " + error.message;
     }
-    allTransactions = transactions;
-displayTransactions(allTransactions);
 }
 
 
